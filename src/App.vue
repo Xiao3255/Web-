@@ -1,29 +1,74 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <header>MC News</header>
+    <div id="main">
+      <appNavbar class="navbar"></appNavbar>
+      <appTable class="table"></appTable>
     </div>
-    <router-view/>
+    <footer></footer>
   </div>
 </template>
 
+<script>
+import {getToutiao} from "./news/getNews";
+import appNavbar from "./components/navBar";
+import appTable from "./components/table";
+
+export default {
+  data() {
+    return {
+      newsData: [],
+    };
+  },
+  components: {
+    appNavbar,
+    appTable
+  },
+  created() {
+    getToutiao().then(res => {
+      this.newsData = res.data.result.data;
+    },err => {
+      console.log(err);
+    })
+  },
+  beforeMount() {
+  }
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body {
+  margin: 0;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 10%;
+
+    font-size: 50px;
+    font-weight: 600;
+    color: #eee;
+    background: red;
+  }
+  #main {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 80%;
+    .navbar {
+      flex: 0 0 6%;
     }
+    .table {
+      flex: 0 0 94%;
+    }
+  }
+  footer {
+    flex: 0 0 10%;
   }
 }
 </style>
