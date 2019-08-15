@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="appNavbar">
     <ul>
       <li v-for="(item, index) in categroy" :key="index">
         <a>{{item.type}}</a>
@@ -31,10 +31,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div {
-  position: relative;
+.appNavbar {
+  flex-shrink: 0;
+  height: 100px;
   overflow: auto;
   white-space: nowrap;
+
   ul,li {
       margin: 0;
       padding: 0;

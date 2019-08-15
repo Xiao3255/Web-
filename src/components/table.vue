@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <appScrollview class="appScrollview"></appScrollview>
-        <appTablecell class="appTablecell"></appTablecell>
+    <div class="appTable">
+        <appScrollview></appScrollview>
+        <appTablecell></appTablecell>
     </div>
 </template>
 
 <script>
-import appTablecell from './tablecell' 
-import appScrollview from './scrollView'
+import appTablecell from './TableCell' 
+import appScrollview from './ScrollView'
 
 export default {
     name: 'app-table',
@@ -19,15 +19,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div {
-    display: flex;
-    flex-direction: column;
-    .appScrollview{
-        flex: 0 0 30%;
-    }
-    .appTablecell{
-        flex: 0 0 70%;
-    }
-}
 
 </style>

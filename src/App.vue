@@ -2,43 +2,42 @@
   <div id="app">
     <header>MC News</header>
     <div id="main">
-      <appNavbar class="navbar"></appNavbar>
-      <appTable class="table"></appTable>
+      <appNavbar></appNavbar>
+      <appTable></appTable>
     </div>
-    <footer></footer>
+    <footer>
+      <appTabbar></appTabbar>
+    </footer>
   </div>
 </template>
 
 <script>
-import {getToutiao} from "./news/getNews";
-import appNavbar from "./components/navBar";
-import appTable from "./components/table";
+import appNavbar from "./components/NavBar";
+import appTable from "./components/Table";
+import appTabbar from "./components/TabBar";
 
 export default {
   data() {
     return {
-      newsData: [],
+      newsData: []
     };
   },
   components: {
     appNavbar,
-    appTable
+    appTable,
+    appTabbar
   },
-  created() {
-    getToutiao().then(res => {
-      this.newsData = res.data.result.data;
-    },err => {
-      console.log(err);
-    })
-  },
-  beforeMount() {
-  }
+  created() {},
+  beforeMount() {}
 };
 </script>
 
 <style lang="scss">
 body {
   margin: 0;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 
 #app {
@@ -60,12 +59,6 @@ body {
     display: flex;
     flex-direction: column;
     flex: 0 0 80%;
-    .navbar {
-      flex: 0 0 6%;
-    }
-    .table {
-      flex: 0 0 94%;
-    }
   }
   footer {
     flex: 0 0 10%;
