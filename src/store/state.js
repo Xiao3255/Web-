@@ -1,4 +1,5 @@
 const state = {
-    newsdata:[]
+    newsdata:[],
+    url: '',
 }
 export default state

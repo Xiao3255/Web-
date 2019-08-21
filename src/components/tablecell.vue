@@ -1,6 +1,13 @@
 <template>
   <div class="appTablecell">
-    <div class="cell" v-for="(item,index) in newsdata" :key="index">
+    <div
+      class="cell"
+      v-for="item in newsdata"
+      :key="item['uniquekey']"
+      :unikey="item['uniquekey']"
+      :url="item['url']"
+      @click="transitionPage($event)"
+    >
       <div class="title">
         <p>{{item['title']}}</p>
         <span>{{item['date']}}</span>
@@ -21,24 +28,33 @@ export default {
   name: "app-tablecell",
   computed: {
     ...mapState(["newsdata"])
+  },
+  methods: {
+    transitionPage(event) {
+      var url = event.currentTarget.getAttribute("url");
+      var unikey = event.currentTarget.getAttribute("unikey");
+      this.$store.commit("sendurl", url);
+      this.$router.push({
+        name: 'new',
+        params: { unikey } 
+      })
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .appTablecell {
-
   .cell {
     display: flex;
-
-    height: 200px;
-    border-bottom:1px solid #c5c5c5;
+    padding: 20px 0;
+    border-bottom: 1px solid #c5c5c5;
     .title {
       position: relative;
       box-sizing: border-box;
       padding: 10px;
       flex: 0 0 70%;
-      span{
+      span {
         position: absolute;
         bottom: 0;
       }
