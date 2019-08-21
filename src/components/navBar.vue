@@ -32,10 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 .appNavbar {
-  flex-shrink: 0;
-  height: 100px;
   overflow: auto;
-  white-space: nowrap;
 
   ul,li {
       margin: 0;
@@ -43,15 +40,13 @@ export default {
   }
   ul {
      display: flex;
-     height: 100%;
   }
   li {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    margin: 0 5px;
-    height: 100%;
+    height: 100px;
     width: 120px;
     list-style: none;
     cursor: pointer;

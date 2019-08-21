@@ -1,6 +1,6 @@
 <template>
   <div class="appScrollview">
-    <div :style="{width: screenW}" v-for="(item,index) in newsdata" :key="index">
+    <div :style="{width: screenW}" v-for="(item,index) in newsdata" :key="index" @click="goToNews">
         <img :src="item['thumbnail_pic_s']" />
     </div>
   </div>
@@ -15,7 +15,10 @@ export default {
     this.getToutiaoRequest();
   },
   methods: {
-    ...mapActions(["getToutiaoRequest"])
+    ...mapActions(["getToutiaoRequest"]),
+    goToNews(){
+       
+    }
   },
   computed: {
     ...mapState(["newsdata"]),
@@ -30,7 +33,6 @@ export default {
 <style lang="scss" scoped>
 .appScrollview {
   display: flex;
-  flex-wrap: nowrap;
   overflow: auto;
   div{
     flex-shrink: 0;
