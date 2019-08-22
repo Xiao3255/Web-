@@ -23,7 +23,8 @@ export default new Router({
     {
       path: '/new/:unikey',
       name: 'new',
-      component: () => import(/* webpackChunkName: "new" */ './views/News.vue')
+      component: () => import(/* webpackChunkName: "new" */ './views/News.vue'),
     }
-  ]
+  ],
 })
+

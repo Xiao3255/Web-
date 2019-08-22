@@ -5,16 +5,15 @@
         <span>&lt;</span>
       </div>
     </header>
-    <div>
-      <iframe
+    <div v-html="htmlString" class="content"></div>
+    <!-- <iframe
         :src="url"
         width="100%"
         height="800"
         style="border:none"
         scrolling="auto"
         sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-      ></iframe>
-    </div>
+    ></iframe>-->
   </div>
 </template>
 
@@ -23,12 +22,23 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["url"])
+    ...mapState(["url", "htmlString"])
   },
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    fetchData() {
+      this.$store.dispatch({
+        type: "asyncRequestNewsDataURL",
+        url: this.url
+      });
     }
+  },
+  beforeRouteEnter: (to, from, next) => {
+    next(vm => {
+      vm.fetchData();
+    });
   }
 };
 </script>
@@ -53,5 +63,8 @@ header {
     background-color: #fff;
     transform: translateY(-50%);
   }
+}
+.content {
+  margin: 0 20px;
 }
 </style>

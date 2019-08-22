@@ -1,7 +1,14 @@
-import {getToutiao} from '../news/request'
+import { requestNewsDataURL, requestNewsURL } from '../news/request'
 
-export function getToutiaoRequest({commit}){
-     getToutiao().then( res => {
-         commit('getNewsToutiao',res.data.result.data)
-     })
+
+export function asyncRequestNewsURL({commit},type){
+    requestNewsURL(type).then(res =>
+        commit('syncRequestNewsURL',res.data.result.data)    
+    )
+}
+
+export function asyncRequestNewsDataURL({commit},{url}){
+    requestNewsDataURL(url).then( res =>
+        commit('syncRequestNewsDataURLAndParse',res.data)
+    )
 }

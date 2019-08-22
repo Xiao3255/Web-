@@ -33,13 +33,13 @@ export default {
     transitionPage(event) {
       var url = event.currentTarget.getAttribute("url");
       var unikey = event.currentTarget.getAttribute("unikey");
-      this.$store.commit("sendurl", url);
+      this.$store.commit("syncSendURL", url);
       this.$router.push({
-        name: 'new',
-        params: { unikey } 
-      })
+        name: "new",
+        params: { unikey }
+      });
     }
-  }
+  },
 };
 </script>
 

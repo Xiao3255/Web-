@@ -13,6 +13,7 @@
 </template>
 
 <script>
+
 export default {
   methods: {
     goHome(){
@@ -20,8 +21,8 @@ export default {
     },
     toAbout(){
       this.$router.push('about');
-    }
-  }
+    },
+  },
 };
 </script>
 

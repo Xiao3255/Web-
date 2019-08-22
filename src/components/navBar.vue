@@ -1,14 +1,20 @@
 <template>
   <div class="appNavbar">
     <ul>
-      <li v-for="(item, index) in categroy" :key="index">
-        <a>{{item.type}}</a>
+      <li
+        v-for="(item, index) in categroy"
+        :key="index"
+        @click="currentType = item.value"
+      >
+        <a :class="[currentType === item.value ? 'selected': '']">{{item.type}}</a>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "app-navbar",
   data() {
@@ -24,8 +30,23 @@ export default {
         { type: "科技", value: "keji" },
         { type: "财经", value: "caijing" },
         { type: "时尚", value: "shishang" }
-      ]
+      ],
+      currentType: "top"
     };
+  },
+  methods: {
+    ...mapActions(["asyncRequestNewsURL"]),
+    catchChange(val, oldval) {
+      if (val !== oldval) {
+        this.asyncRequestNewsURL(this.currentType);
+      }
+    }
+  },
+  watch: {
+    currentType: {
+      handler: "catchChange",
+      immediate: false
+    }
   }
 };
 </script>
@@ -34,12 +55,13 @@ export default {
 .appNavbar {
   overflow: auto;
 
-  ul,li {
-      margin: 0;
-      padding: 0;
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
   }
   ul {
-     display: flex;
+    display: flex;
   }
   li {
     display: flex;
@@ -50,6 +72,10 @@ export default {
     width: 120px;
     list-style: none;
     cursor: pointer;
+    a.selected {
+      border-radius: 35px;
+      background-color: #e0e0e0;
+    }
   }
 }
 </style> 
