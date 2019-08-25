@@ -1,8 +1,8 @@
 <template>
   <div class="appScrollview">
     <div :style="{width: screenW}">
-      <slider ref="slider" :options="options" @tap="onTap" @slide='onSlide'>
-        <slideritem v-for="(item,index) in newsdata" :key="index">
+      <slider ref="slider" :options="options" @tap="onTap" @slide="onSlide">
+        <slideritem v-for="(item,index) in randomNews" :key="index">
           <img
             ref="img"
             :src="item['thumbnail_pic_s']"
@@ -37,12 +37,9 @@ export default {
         loopedSlides: 1,
         slidesToScroll: 1,
         timingFunction: "ease",
-        speed: 300,
+        speed: 300
       }
     };
-  },
-  created() {
-    this.asyncRequestNewsURL("top");
   },
   methods: {
     ...mapActions(["asyncRequestNewsURL"]),
@@ -56,12 +53,12 @@ export default {
         params: { unikey }
       });
     },
-    onSlide(){
-      this.$refs.slider.$emit('autoplayStart',1000);
+    onSlide() {
+      this.$refs.slider.$emit("autoplayStart", 1000);
     }
   },
   computed: {
-    ...mapState(["newsdata"]),
+    ...mapState(["randomNews"]),
 
     screenW() {
       return document.documentElement.clientWidth + "px";

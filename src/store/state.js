@@ -1,6 +1,11 @@
 const state = {
-    newsdata:[],
+    newsdata:{randomNews: [], onceNews: []},
+    type: '',
+    currentType: 'top',
+    randomNews: [],
+    partNews: [],
     url: '',
-    htmlString: ''
+    htmlString: '',
+    isMerge: false
 }
 export default state

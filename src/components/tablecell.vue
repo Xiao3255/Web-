@@ -2,8 +2,8 @@
   <div class="appTablecell">
     <div
       class="cell"
-      v-for="item in newsdata"
-      :key="item['uniquekey']"
+      v-for="(item,index) in partNews"
+      :key="index"
       :unikey="item['uniquekey']"
       :url="item['url']"
       @click="transitionPage($event)"
@@ -27,7 +27,7 @@ import { mapState } from "vuex";
 export default {
   name: "app-tablecell",
   computed: {
-    ...mapState(["newsdata"])
+    ...mapState(["partNews"])
   },
   methods: {
     transitionPage(event) {

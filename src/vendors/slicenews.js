@@ -19,5 +19,7 @@ export function getSliceNews(data, count) {
         }
         newsArr.push(temparr);
     }
-    return newsArr[randomIndex];
+    return { randomNews: newsArr[randomIndex], onceNews: newsArr }
 }
+
+

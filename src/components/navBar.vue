@@ -1,11 +1,7 @@
 <template>
   <div class="appNavbar">
     <ul>
-      <li
-        v-for="(item, index) in categroy"
-        :key="index"
-        @click="currentType = item.value"
-      >
+      <li v-for="(item, index) in categroy" :key="index" @click="currentType = item.value">
         <a :class="[currentType === item.value ? 'selected': '']">{{item.type}}</a>
       </li>
     </ul>
@@ -13,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "app-navbar",
@@ -35,9 +31,11 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["changeStatus"]),
     ...mapActions(["asyncRequestNewsURL"]),
     catchChange(val, oldval) {
       if (val !== oldval) {
+        this.changeStatus({ currentType: this.currentType, isMerge: false });
         this.asyncRequestNewsURL(this.currentType);
       }
     }
@@ -72,6 +70,10 @@ export default {
     width: 120px;
     list-style: none;
     cursor: pointer;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
     a.selected {
       border-radius: 35px;
       background-color: #e0e0e0;
